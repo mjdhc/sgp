@@ -82,7 +82,6 @@ public class UsuarioController implements Serializable{
             Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
       
-        
     }
 /*
     public void cambioProvincia() {
