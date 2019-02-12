@@ -31,36 +31,27 @@ public class SjSisPersonaFacade extends AbstractFacade<SjSisPersona> implements 
         super(SjSisPersona.class);
     }
 
-    /*
-    
-    */
+    /**
+     * @author cuevaw
+     * @Descripcion: Metodo de conlsuta de usuarios
+     * @param: usuario y contraseña en un objeto personas 
+     * @return: retorna un onbeto personas
+     */
     @Override
     public SjSisPersona IniciasSesion(SjSisPersona per) {
         SjSisPersona persona = null;
         String consulta;
-        
-        System.out.println("paso2");
         try {
-            System.out.println("paso3 el usuario es "+per.getPerUsuario());
-            
-            consulta = "FROM SjSisPersona u WHERE u.per_usuario =?1";
+            consulta = "FROM SjSisPersona u WHERE u.perUsuario =?1";
             Query query = em.createQuery(consulta);
-            query.setParameter(1, "cuevaw");
-            
-            //query.setParameter(1, per.getPerUsuario());
-            
-            System.out.println("paso4");
+            query.setParameter(1, per.getPerUsuario());
             List<SjSisPersona> lstUsuario = query.getResultList();
-            System.out.println("paso5");
-            
             if (!lstUsuario.isEmpty()) {
-                System.out.println("paso6");
                 persona = lstUsuario.get(0);
             }
         } catch (Exception e) {
             throw e;
         }
-
         return persona;
     }
 }

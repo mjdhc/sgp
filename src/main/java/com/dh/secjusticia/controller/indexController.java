@@ -10,6 +10,8 @@ import com.dh.secjusticia.modelo.SjSisPersona;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -39,11 +41,26 @@ public class indexController implements Serializable {
         this.personas = personas;
     }
 
-   
-    public String IngresarSistema(){
-        
-        System.err.println("Ingreso al metodo solicitado");
-        return "/protegido/principal";
+    /**
+     * @author cuevaw
+     * @Descripcion: Metodo de validacion de usuarios para ingreso de sistema
+     * @return: String con direccion a pagina inicial
+     */
+    public String iniciarSesion() {
+        String redireccion = null;
+        SjSisPersona per;
+        try {
+            per = personaEJB.IniciasSesion(personas);
+            if (per != null) {
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", per);
+                redireccion = "/protegido/principal?faces-redirect=true";
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso", "Credenciales Incorrectas"));
+            }
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aviso", "El Usuario y Contraseña no Corresponden"));
+        }
+        return redireccion;
     }
 
 }
