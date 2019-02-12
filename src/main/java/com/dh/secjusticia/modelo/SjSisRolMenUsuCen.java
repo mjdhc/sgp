@@ -49,12 +49,12 @@ public class SjSisRolMenUsuCen implements Serializable {
     @JoinColumn(name = "men_id", referencedColumnName = "men_id")
     @ManyToOne
     private SjSisMenu menId;
+    @JoinColumn(name = "per_id", referencedColumnName = "per_id")
+    @ManyToOne
+    private SjSisPersona perId;
     @JoinColumn(name = "rol_id", referencedColumnName = "rol_id")
     @ManyToOne
     private SjSisRol rolId;
-    @JoinColumn(name = "usu_id", referencedColumnName = "usu_id")
-    @ManyToOne
-    private SjSisUsuario usuId;
 
     public SjSisRolMenUsuCen() {
     }
@@ -103,20 +103,20 @@ public class SjSisRolMenUsuCen implements Serializable {
         this.menId = menId;
     }
 
+    public SjSisPersona getPerId() {
+        return perId;
+    }
+
+    public void setPerId(SjSisPersona perId) {
+        this.perId = perId;
+    }
+
     public SjSisRol getRolId() {
         return rolId;
     }
 
     public void setRolId(SjSisRol rolId) {
         this.rolId = rolId;
-    }
-
-    public SjSisUsuario getUsuId() {
-        return usuId;
-    }
-
-    public void setUsuId(SjSisUsuario usuId) {
-        this.usuId = usuId;
     }
 
     @Override

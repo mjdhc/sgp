@@ -6,100 +6,118 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+    
     <body>
 
         <ui:composition template="./WEB-INF/template/plantilla.xhtml">
 
             <ui:define name="content">
                 <h:form>
-                    <p:fieldset legend="Ingresar al nuevo Integrante">
-                        <h:panelGrid columns="6">
-                            <p:outputLabel value="Nombres"/>
-                            <p:inputText/>
+                    <p:growl id="mensaje" autoUpdate="true" showDetail="true" />
+                    
+                    <p:fieldset legend="Ingresar al nuevo Usuario">
+                        <h:panelGrid columns="6" id="pgDatos">
+                            <p:outputLabel for="txtNombre" value="Nombres"/>
+                            <p:inputText id="txtNombre" value="#{usuarioController.persona.perNombres}" required="true"/>
+                            <p:message for="txtNombre"/>
 
-                            <p:outputLabel value="Apellidos"/>
-                            <p:inputText/>
+                            <p:outputLabel for="txtApellidos" value="Apellidos"/>
+                            <p:inputText id="txtApellidos" value="#{usuarioController.persona.perApellidos}" required="true"/>
+                            <p:message for="txtApellidos"/>
 
-                            <p:outputLabel value="Direccion"/>
-                            <p:inputText/>
+                            <p:outputLabel for="txtDireccion" value="Direccion"/>
+                            <p:inputText id="txtDireccion" value="#{usuarioController.persona.perDireccion}" required="true"/>
+                            <p:message for="txtApellidos"/>
 
-                            <p:outputLabel value="Fecha Nacimiento"/>
-                            <p:calendar/>
+                            <p:outputLabel for="txtFecNacido" value="Fecha Nacimiento"/>
+                            <p:calendar id="txtFecNacido" locale="es" value="#{usuarioController.persona.perFecnac}" required="true" />
+                            <p:message for="txtFecNacido"/>
 
-                            <p:outputLabel value="Telefono"/>
-                            <p:inputText/>
+                            <p:outputLabel for="txtFono" value="Telefono"/>
+                            <p:inputText id="txtFono" value="#{usuarioController.persona.perFono}" required="true"/>
+                            <p:message for="txtFono"/>
 
-                            <p:outputLabel value="Celular"/>
-                            <p:inputText/>
+                            <p:outputLabel for="txtCelular" value="Celular"/>
+                            <p:inputText id="txtCelular" value="#{usuarioController.persona.perCelular}" required="true"/>
+                            <p:message for="txtApellidos"/>
 
-                            <p:outputLabel value="Email"/>
-                            <p:inputText/>
+                            <p:outputLabel for="txtEmailPer" value="Email Personal"/>
+                            <p:inputText id="txtEmailPer" value="#{usuarioController.persona.perEmail}" required="true"/>
+                            <p:message for="txtEmailPer"/>
 
-                            <p:outputLabel value="Estado"/>
-                            <p:selectOneRadio>
-                                <f:selectItem itemValue="t" itemLabel="Activado"/>
-                                <f:selectItem itemValue="f" itemLabel="Desactivado"/>
+                            <p:outputLabel for="txtUsuario" value="Usuario"/>
+                            <p:inputText id="txtUsuario" value="#{usuarioController.persona.perUsuario}" required="true"/>
+                            <p:message for="txtUsuario"/>
+                            
+                            
+                            <p:outputLabel for="rbnEstado" value="Estado"/>
+                            <p:selectOneRadio id="rbnEstado" value="#{usuarioController.persona.perEstado}" required="true">
+                                <f:selectItem itemValue="true" itemLabel="Activado"/>
+                                <f:selectItem itemValue="false" itemLabel="Desactivado"/>
                             </p:selectOneRadio>
+                            <p:message for="rbnEstado"/>
 
-                            <p:outputLabel value="Tipo Documento"/> 
-                            <p:selectOneMenu id="cboTipDocument" value="#{usuarioController.tipoDocumento.tipdId}">
+                            <p:outputLabel for="cboTipDocument" value="Tipo Documento"/> 
+                            <p:selectOneMenu id="cboTipDocument" value="#{usuarioController.tipoDocumento.tipdId}" required="true" >
                                 <f:selectItems value="#{usuarioController.allDocumentos}" var="tdoc" itemLabel="#{tdoc.tipdNombre}" itemValue="#{tdoc.tipdId}"/>
                             </p:selectOneMenu>                            
+                            <p:message for="cboTipDocument"/>
 
-                            <p:outputLabel value="Numero Documento"/>
-                            <p:inputText/>
+                            <p:outputLabel for="txtNumDoc" value="Numero Documento"/>
+                            <p:inputText id="txtNumDoc" value="#{usuarioController.persona.perIdentificador}" required="true"/>
+                            <p:message for="txtNumDoc"/>
 
-                            <p:outputLabel value="Estado Civil"/>
-                            <p:selectOneMenu id="cboRegCivil" value="#{usuarioController.estadoCivil.civId}">
+                            <p:outputLabel for="cboRegCivil" value="Estado Civil"/>
+                            <p:selectOneMenu id="cboRegCivil" value="#{usuarioController.estadoCivil.civId}" required="true">
                                 <f:selectItems value="#{usuarioController.allEstCivil}" var="eciv" itemLabel="#{eciv.civNombre}" itemValue="#{eciv.civId}"/>
                             </p:selectOneMenu>
+                            <p:message for="cboRegCivil"/>
 
-                            <p:outputLabel value="Sexo"/>
-                            <p:selectOneMenu id="cboSexo" value="#{usuarioController.sexo.sexId}">
+                            <p:outputLabel for="cboSexo" value="Sexo"/>
+                            <p:selectOneMenu id="cboSexo" value="#{usuarioController.sexo.sexId}" required="true">
                                 <f:selectItems value="#{usuarioController.allSexo}" var="sex" itemLabel="#{sex.sexNombre}" itemValue="#{sex.sexId}"/>
                             </p:selectOneMenu>
+                            <p:message for="cboSexo"/>
 
-                            <p:outputLabel value="Genero"/>
-                            <p:selectOneMenu id="cboGenero" value="#{usuarioController.genero.genId}">
+                            <p:outputLabel for="cboGenero" value="Genero"/>
+                            <p:selectOneMenu id="cboGenero" value="#{usuarioController.genero.genId}" required="true">
                                 <f:selectItems value="#{usuarioController.allGenero}" var="gen" itemLabel="#{gen.genNombre}" itemValue="#{gen.genId}"/>
                             </p:selectOneMenu>
-
-
-                        </h:panelGrid>
-                    </p:fieldset>
-                    <p:fieldset legend="Geografico">
-                        <h:panelGrid columns="6">
-                           
-                            <p:outputLabel value="Provincia"/>
-                            <p:selectOneMenu id="cboProvincia" value="#{usuarioController.divpolitica.polIdProvincia}">
-                                <f:selectItems value="#{usuarioController.allProvincias}" var="divpol" itemLabel="#{divpol.polNombre}" itemValue="#{divpol.polIdProvincia}"/>
+                            <p:message for="cboGenero"/>
+                            
+                            <p:outputLabel for="cboProvincia" value="Provincia"/>
+                            <p:selectOneMenu id="cboProvincia" value="#{usuarioController.codProvincia}" style="width:200px" required="true">                                 
+                                <p:ajax listener="#{usuarioController.LlenarCantones()}" update="cboCanton" />
+                                <f:selectItem itemLabel="Seleccione Provincias" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{usuarioController.allProvincias}" var="provin" itemLabel="#{provin.polNombre}" itemValue="#{provin.polIdProvincia}"/>
                             </p:selectOneMenu>
-                             
-                             
+                            <p:message for="cboProvincia"/>
 
-                            <p:outputLabel value="Canton"/>
-                            <p:selectOneMenu id="cboCanton"></p:selectOneMenu>
+                            <p:outputLabel for="cboCanton" value="Canton"/>
+                            <p:selectOneMenu id="cboCanton" value="#{usuarioController.codCanton}" style="width:200px" required="true">
+                                <p:ajax listener="#{usuarioController.LlenarParroquias()}" update="cboParroquia" />                                
+                                <f:selectItem itemLabel="Seleccione Canton" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{usuarioController.allCantones}" var="cant" itemLabel="#{cant.polNombre}" itemValue="#{cant.polIdCanton}"/>
+                            </p:selectOneMenu>
+                            <p:message for="cboCanton"/>
 
-                            <p:outputLabel value="Parroquia"/>
-                            <p:selectOneMenu id="cboParroquia"></p:selectOneMenu>
-                        </h:panelGrid>    
-                    </p:fieldset>
-
-                    <p:fieldset legend="Datos del usuario">
-                        <h:panelGrid columns="2">
-                            <p:outputLabel value="Usuario"/>
-                            <p:inputText/>
-
-                            <p:outputLabel value="Clave"/>
-                            <p:password/>
-
-                            <p:outputLabel value="Repetir Clave"/>
-                            <p:password/>
+                            <p:outputLabel for="cboParroquia" value="Parroquia"/>
+                            <p:selectOneMenu id="cboParroquia" value="#{usuarioController.persona.polParroquia}" style="width:200px" required="true">
+                                <f:selectItem itemLabel="Seleccione Parroquia" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{usuarioController.allParroquias}" var="parr" itemLabel="#{parr.polNombre}" itemValue="#{parr.polIdParroquia}"/>
+                            </p:selectOneMenu>
+                            <p:message for="cboParroquia"/>                            
+                        </h:panelGrid>  
+                        
+                        <h:panelGrid columns="4">
+                            <p:column/>
+                             <p:commandButton icon="ui-icon-check" value="Ingresar" update="pgDatos" actionListener="#{usuarioController.nuevoUsuario()}"/>
+                             <p:column/>
+                             <p:commandButton value="Cancelar"/>
                         </h:panelGrid>
                     </p:fieldset>
                 </h:form>
             </ui:define>
-
         </ui:composition>
 
     </body>

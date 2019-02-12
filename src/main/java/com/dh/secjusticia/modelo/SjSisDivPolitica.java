@@ -30,7 +30,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "SjSisDivPolitica.findAll", query = "SELECT s FROM SjSisDivPolitica s")
-    //,@NamedQuery(name = "SjSisDivPolitica.findAllProvincias", query = "SELECT s FROM SjSisDivPolitica s WHERE s.pol_id_canton=0 AND s.pol_id_parroquia=0 AND s.pol_id_provincia !=0 ORDER BY s.pol_id_provincia")    
     , @NamedQuery(name = "SjSisDivPolitica.findByPolId", query = "SELECT s FROM SjSisDivPolitica s WHERE s.polId = :polId")
     , @NamedQuery(name = "SjSisDivPolitica.findByPolZona", query = "SELECT s FROM SjSisDivPolitica s WHERE s.polZona = :polZona")
     , @NamedQuery(name = "SjSisDivPolitica.findByPolDistrito", query = "SELECT s FROM SjSisDivPolitica s WHERE s.polDistrito = :polDistrito")
@@ -202,5 +201,5 @@ public class SjSisDivPolitica implements Serializable {
     public String toString() {
         return "com.dh.secjusticia.modelo.SjSisDivPolitica[ polId=" + polId + " ]";
     }
-
+    
 }

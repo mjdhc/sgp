@@ -8,11 +8,14 @@ package com.dh.secjusticia.controller;
 import com.dh.secjusticia.ejb.SjSisCivilFacadeLocal;
 import com.dh.secjusticia.ejb.SjSisDivPoliticaFacadeLocal;
 import com.dh.secjusticia.ejb.SjSisGeneroFacadeLocal;
+import com.dh.secjusticia.ejb.SjSisPersonaFacadeLocal;
 import com.dh.secjusticia.ejb.SjSisSexoFacadeLocal;
 import com.dh.secjusticia.ejb.SjSisTipDocumentoFacadeLocal;
+
 import com.dh.secjusticia.modelo.SjSisCivil;
 import com.dh.secjusticia.modelo.SjSisDivPolitica;
 import com.dh.secjusticia.modelo.SjSisGenero;
+import com.dh.secjusticia.modelo.SjSisPersona;
 import com.dh.secjusticia.modelo.SjSisSexo;
 import com.dh.secjusticia.modelo.SjSisTipDocumento;
 import java.io.Serializable;
@@ -21,6 +24,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -29,24 +34,32 @@ import javax.inject.Named;
  *
  * @author cuevaw
  */
-
 @Named
 @ViewScoped
-public class UsuarioController implements Serializable{
+
+public class UsuarioController implements Serializable {
+    
+    private int codProvincia;
+    private int codCanton;
+    FacesMessage msg;
+
     @EJB
     private SjSisTipDocumentoFacadeLocal tipoDocuemntoEJB;
     @EJB
-    private SjSisCivilFacadeLocal estadoCivilEJB;    
+    private SjSisCivilFacadeLocal estadoCivilEJB;
     @EJB
     private SjSisSexoFacadeLocal sexoEJB;
     @EJB
     private SjSisGeneroFacadeLocal generoEJB;
-    @EJB 
+    @EJB
     private SjSisDivPoliticaFacadeLocal divpoliticaEJB;
+    @EJB
+    private SjSisPersonaFacadeLocal personaEJB;
+   
     
     
     @Inject
-    private SjSisTipDocumento tipoDocumento;    
+    private SjSisTipDocumento tipoDocumento;
     @Inject
     private SjSisCivil estadoCivil;
     @Inject
@@ -55,50 +68,83 @@ public class UsuarioController implements Serializable{
     private SjSisGenero genero;
     @Inject
     private SjSisDivPolitica divpolitica;
+    @Inject
+    private SjSisPersona persona;
+   
     
-    
-    
-    private  List<SjSisTipDocumento> allDocumentos;
-    private  List<SjSisCivil> allEstCivil;
+
+    private List<SjSisTipDocumento> allDocumentos;
+    private List<SjSisCivil> allEstCivil;
     private List<SjSisSexo> allSexo;
     private List<SjSisGenero> allGenero;
-    
+
     private List<SjSisDivPolitica> allProvincias;
     private List<SjSisDivPolitica> allCantones;
     private List<SjSisDivPolitica> allParroquias;
-    
-    
+
     @PostConstruct
-    public void init(){
-        
-      allDocumentos = tipoDocuemntoEJB.findAll();
-      allEstCivil = estadoCivilEJB.findAll();
-      allSexo= sexoEJB.findAll();
-      allGenero= generoEJB.findAll();
-        
-      try { 
-            allProvincias= divpoliticaEJB.findAllProvincias();
+    public void init() {
+      
+        allDocumentos = tipoDocuemntoEJB.findAll();
+        allEstCivil = estadoCivilEJB.findAll();
+        allSexo = sexoEJB.findAll();
+        allGenero = generoEJB.findAll();
+
+        try {
+            allProvincias = divpoliticaEJB.findAllProvincias();
         } catch (Exception ex) {
             Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
-    }
-/*
-    public void cambioProvincia() {
-        if(country !=null && !country.equals(""))
-            cities = data.get(country);
-        else
-            cities = new HashMap<String, String>();
-    }
-    
-  */  
+    }    
+   
     public void llenarProvincias() throws Exception{
         try {
             allProvincias= divpoliticaEJB.findAllProvincias();            
         } catch (Exception e) {
             throw e;
+        }        
+    }
+
+    public void LlenarCantones() {
+       allCantones =divpoliticaEJB.findAllCantones(codProvincia);
+    }
+    
+     public void LlenarParroquias() {
+         allParroquias =divpoliticaEJB.findAllParroquias(codProvincia,codCanton);
+    }
+    
+    public void nuevoUsuario(){
+        try {
+            
+            persona.setPolProvincia(codProvincia); 
+            persona.setPolCanton(codCanton);
+            persona.setTipdId(tipoDocumento);
+            persona.setCivId(estadoCivil);
+            persona.setSexId(sexo);
+            persona.setGenId(genero);
+            
+            personaEJB.create(persona);            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso","Se ingreso un nuevo usuario"));
+            
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aviso","NO Se ingreso un nuevo usuario"));
         }
-        
+    }
+     
+    public int getCodProvincia() {
+        return codProvincia;
+    }
+
+    public void setCodProvincia(int codProvincia) {
+        this.codProvincia = codProvincia;
+    }
+
+    public int getCodCanton() {
+        return codCanton;
+    }
+
+    public void setCodCanton(int codCanton) {
+        this.codCanton = codCanton;
     }
 
     public List<SjSisDivPolitica> getAllProvincias() {
@@ -133,6 +179,14 @@ public class UsuarioController implements Serializable{
         this.genero = genero;
     }
 
+    public SjSisPersona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(SjSisPersona persona) {
+        this.persona = persona;
+    }
+
     public SjSisDivPolitica getDivpolitica() {
         return divpolitica;
     }
@@ -141,6 +195,7 @@ public class UsuarioController implements Serializable{
         this.divpolitica = divpolitica;
     }
 
+    
     public List<SjSisGenero> getAllGenero() {
         return allGenero;
     }
@@ -199,7 +254,5 @@ public class UsuarioController implements Serializable{
         this.estadoCivil = estadoCivil;
     }
     
-    
-    
-    
+
 }

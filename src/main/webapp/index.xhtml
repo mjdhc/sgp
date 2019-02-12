@@ -8,13 +8,22 @@
     </h:head>
     <h:body>
         <h:form>
-           
-           
-            <p:inputText value="#{tipoDocumentoController.documento.tipdNombre}"/>
-            <p:commandButton value="Ingresar documento" actionListener="#{tipoDocumentoController.ingresaTipoDocumento()}"/>
+            <p:messages autoUpdate="true"/>
             
+            <h:panelGrid columns="2">
+                <p:outputLabel for="txtUsuario" value="Usuario"/>
+                <p:inputText id="txtUsuario" required="true" value="#{indexController.personas.perUsuario}"/>
+                
+                <p:outputLabel for="txtClave" value="Contraseña"/>
+                <p:inputText id="txtClave" required="true"/>
+                
+                <h:column/>
+                <p:commandButton icon="ui-icon-key" value="Ingresar" actionListener="#{indexController.ingresarSistema}"/>   
+                
+            </h:panelGrid>
             
-            <p:link value="Ingresar usuario" outcome="usuario"/>
+            <p:separator/>
+            <p:link value="Nuevo usuario" outcome="usuario"/>
             
         </h:form>
     </h:body>

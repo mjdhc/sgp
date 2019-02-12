@@ -25,23 +25,21 @@ public interface SjSisDivPoliticaFacadeLocal {
     SjSisDivPolitica find(Object id);
 
     List<SjSisDivPolitica> findAll();
- 
+
     List<SjSisDivPolitica> findRange(int[] range);
 
     int count();
-  
+    
     
     List<SjSisDivPolitica> findAllProvincias() throws Exception;
   
     /*
      metodo para consultar todos los Cantones de una Provincia
     */  
-  //List<SjSisDivPolitica> findAllCantones(int codProvincia);
+    List<SjSisDivPolitica> findAllCantones(int codProvincia);
   
     /*
      metodo para consultar todos las parroquias de un Canton
     */  
-    //List<SjSisDivPolitica> findAllParroquias(int codCanton);
-    
-    
+    List<SjSisDivPolitica> findAllParroquias(int codProvincia, int codCanton);
 }

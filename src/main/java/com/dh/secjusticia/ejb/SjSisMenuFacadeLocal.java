@@ -6,6 +6,7 @@
 package com.dh.secjusticia.ejb;
 
 import com.dh.secjusticia.modelo.SjSisMenu;
+import com.dh.secjusticia.modelo.SjSisPersona;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -28,6 +29,7 @@ public interface SjSisMenuFacadeLocal {
 
     List<SjSisMenu> findRange(int[] range);
 
-    int count();
+    int count(); 
+    
     
 }

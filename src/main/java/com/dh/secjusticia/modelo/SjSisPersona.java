@@ -43,9 +43,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "SjSisPersona.findByPerFono", query = "SELECT s FROM SjSisPersona s WHERE s.perFono = :perFono")
     , @NamedQuery(name = "SjSisPersona.findByPerCelular", query = "SELECT s FROM SjSisPersona s WHERE s.perCelular = :perCelular")
     , @NamedQuery(name = "SjSisPersona.findByPerEmail", query = "SELECT s FROM SjSisPersona s WHERE s.perEmail = :perEmail")
+    , @NamedQuery(name = "SjSisPersona.findByPerUsuario", query = "SELECT s FROM SjSisPersona s WHERE s.perUsuario = :perUsuario")
     , @NamedQuery(name = "SjSisPersona.findByPerEstado", query = "SELECT s FROM SjSisPersona s WHERE s.perEstado = :perEstado")
     , @NamedQuery(name = "SjSisPersona.findByPerIdentificador", query = "SELECT s FROM SjSisPersona s WHERE s.perIdentificador = :perIdentificador")
-    , @NamedQuery(name = "SjSisPersona.findByFotoId", query = "SELECT s FROM SjSisPersona s WHERE s.fotoId = :fotoId")
     , @NamedQuery(name = "SjSisPersona.findByPolProvincia", query = "SELECT s FROM SjSisPersona s WHERE s.polProvincia = :polProvincia")
     , @NamedQuery(name = "SjSisPersona.findByPolCanton", query = "SELECT s FROM SjSisPersona s WHERE s.polCanton = :polCanton")
     , @NamedQuery(name = "SjSisPersona.findByPolParroquia", query = "SELECT s FROM SjSisPersona s WHERE s.polParroquia = :polParroquia")})
@@ -69,7 +69,7 @@ public class SjSisPersona implements Serializable {
     @Column(name = "per_fecnac")
     @Temporal(TemporalType.DATE)
     private Date perFecnac;
-    @Size(max = 10)
+    @Size(max = 13)
     @Column(name = "per_fono")
     private String perFono;
     @Size(max = 13)
@@ -78,13 +78,14 @@ public class SjSisPersona implements Serializable {
     @Size(max = 50)
     @Column(name = "per_email")
     private String perEmail;
+    @Size(max = 20)
+    @Column(name = "per_usuario")
+    private String perUsuario;
     @Column(name = "per_estado")
     private Boolean perEstado;
     @Size(max = 15)
     @Column(name = "per_identificador")
     private String perIdentificador;
-    @Column(name = "foto_id")
-    private Integer fotoId;
     @Column(name = "pol_provincia")
     private Integer polProvincia;
     @Column(name = "pol_canton")
@@ -104,9 +105,9 @@ public class SjSisPersona implements Serializable {
     @ManyToOne
     private SjSisTipDocumento tipdId;
     @OneToMany(mappedBy = "perId")
-    private Collection<SjSisUsuario> sjSisUsuarioCollection;
-    @OneToMany(mappedBy = "perId")
     private Collection<SjSisFoto> sjSisFotoCollection;
+    @OneToMany(mappedBy = "perId")
+    private Collection<SjSisRolMenUsuCen> sjSisRolMenUsuCenCollection;
 
     public SjSisPersona() {
     }
@@ -179,6 +180,14 @@ public class SjSisPersona implements Serializable {
         this.perEmail = perEmail;
     }
 
+    public String getPerUsuario() {
+        return perUsuario;
+    }
+
+    public void setPerUsuario(String perUsuario) {
+        this.perUsuario = perUsuario;
+    }
+
     public Boolean getPerEstado() {
         return perEstado;
     }
@@ -193,14 +202,6 @@ public class SjSisPersona implements Serializable {
 
     public void setPerIdentificador(String perIdentificador) {
         this.perIdentificador = perIdentificador;
-    }
-
-    public Integer getFotoId() {
-        return fotoId;
-    }
-
-    public void setFotoId(Integer fotoId) {
-        this.fotoId = fotoId;
     }
 
     public Integer getPolProvincia() {
@@ -260,21 +261,21 @@ public class SjSisPersona implements Serializable {
     }
 
     @XmlTransient
-    public Collection<SjSisUsuario> getSjSisUsuarioCollection() {
-        return sjSisUsuarioCollection;
-    }
-
-    public void setSjSisUsuarioCollection(Collection<SjSisUsuario> sjSisUsuarioCollection) {
-        this.sjSisUsuarioCollection = sjSisUsuarioCollection;
-    }
-
-    @XmlTransient
     public Collection<SjSisFoto> getSjSisFotoCollection() {
         return sjSisFotoCollection;
     }
 
     public void setSjSisFotoCollection(Collection<SjSisFoto> sjSisFotoCollection) {
         this.sjSisFotoCollection = sjSisFotoCollection;
+    }
+
+    @XmlTransient
+    public Collection<SjSisRolMenUsuCen> getSjSisRolMenUsuCenCollection() {
+        return sjSisRolMenUsuCenCollection;
+    }
+
+    public void setSjSisRolMenUsuCenCollection(Collection<SjSisRolMenUsuCen> sjSisRolMenUsuCenCollection) {
+        this.sjSisRolMenUsuCenCollection = sjSisRolMenUsuCenCollection;
     }
 
     @Override

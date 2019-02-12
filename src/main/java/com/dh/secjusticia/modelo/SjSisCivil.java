@@ -40,7 +40,7 @@ public class SjSisCivil implements Serializable {
     @Basic(optional = false)
     @Column(name = "civ_id")
     private Integer civId;
-    @Size(max = 10)
+    @Size(max = 20)
     @Column(name = "civ_nombre")
     private String civNombre;
     @OneToMany(mappedBy = "civId")

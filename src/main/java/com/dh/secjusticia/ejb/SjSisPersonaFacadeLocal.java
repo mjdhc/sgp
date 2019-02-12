@@ -30,4 +30,6 @@ public interface SjSisPersonaFacadeLocal {
 
     int count();
     
+    SjSisPersona IniciasSesion(SjSisPersona per);
+    
 }
