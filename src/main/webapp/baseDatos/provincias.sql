@@ -1757,3 +1757,38 @@ INSERT INTO "public"."sj_sis_div_politica" ("pol_id", "pol_zona", "pol_distrito"
 INSERT INTO "public"."sj_sis_div_politica" ("pol_id", "pol_zona", "pol_distrito", "pol_circuito", "pol_id_provincia", "pol_id_canton", "pol_id_parroquia", "pol_nombre", "pol_activo") VALUES (1757,2,1,0,15,3,56,'HATUN SUMAKU',1);
 INSERT INTO "public"."sj_sis_div_politica" ("pol_id", "pol_zona", "pol_distrito", "pol_circuito", "pol_id_provincia", "pol_id_canton", "pol_id_parroquia", "pol_nombre", "pol_activo") VALUES (1758,2,1,0,15,1,58,'SAN JUAN DE MUYUNA',1);
 INSERT INTO "public"."sj_sis_div_politica" ("pol_id", "pol_zona", "pol_distrito", "pol_circuito", "pol_id_provincia", "pol_id_canton", "pol_id_parroquia", "pol_nombre", "pol_activo") VALUES (1759,5,12,0,17,1,0,'CHAUPICRUZ2',0);
+
+--tipo documento--
+INSERT INTO "public"."sj_sis_tip_documento" ("tipd_id", "tipd_nombre") VALUES ('1', 'CEDULA');
+INSERT INTO "public"."sj_sis_tip_documento" ("tipd_id", "tipd_nombre") VALUES ('2', 'PASAPORTE');
+INSERT INTO "public"."sj_sis_tip_documento" ("tipd_id", "tipd_nombre") VALUES ('3', 'DNI');
+INSERT INTO "public"."sj_sis_tip_documento" ("tipd_id", "tipd_nombre") VALUES ('4', 'INDOCUMENTADO');
+
+
+--sexo---
+
+INSERT INTO "public"."sj_sis_sexo" ("sex_id", "sex_nombre") VALUES ('1', 'HOMBRE');
+INSERT INTO "public"."sj_sis_sexo" ("sex_id", "sex_nombre") VALUES ('2', 'SEXO');
+
+--Genero--
+
+INSERT INTO "public"."sj_sis_genero" ("gen_id", "gen_nombre") VALUES ('1', 'MASCULINO');
+INSERT INTO "public"."sj_sis_genero" ("gen_id", "gen_nombre") VALUES ('2', 'FEMENINO');
+INSERT INTO "public"."sj_sis_genero" ("gen_id", "gen_nombre") VALUES ('3', 'HOMOSEXUAL');
+
+--registro civil
+
+INSERT INTO "public"."sj_sis_civil" ("civ_id", "civ_nombre") VALUES ('1', 'SOLTERO');
+INSERT INTO "public"."sj_sis_civil" ("civ_id", "civ_nombre") VALUES ('2', 'CASADO');
+INSERT INTO "public"."sj_sis_civil" ("civ_id", "civ_nombre") VALUES ('3', 'DIVORCIADO');
+INSERT INTO "public"."sj_sis_civil" ("civ_id", "civ_nombre") VALUES ('4', 'VIUDO');
+INSERT INTO "public"."sj_sis_civil" ("civ_id", "civ_nombre") VALUES ('5', 'UNION LIBR');
+
+
+
+
+
+
+
+
+

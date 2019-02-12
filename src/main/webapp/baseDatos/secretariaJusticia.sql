@@ -34,40 +34,25 @@ COMMENT ON COLUMN "sj_sis_centro"."pol_caton" IS 'identificado de la canton del 
 COMMENT ON COLUMN "sj_sis_centro"."pol_parroquia" IS 'identificado de la parroquia del centro';
 COMMENT ON COLUMN "sj_sis_centro"."tipc_id" IS 'identificado del  tipo de centro';
 
-CREATE TABLE "sj_sis_usuario" (
-"usu_id" serial NOT NULL,
-"usu_usuario" varchar(20),
-"usu_clave" varchar(200),
-"usu_estado" bool,
-"per_id" int4,
-PRIMARY KEY ("usu_id") 
-);
-
-COMMENT ON COLUMN "sj_sis_usuario"."usu_id" IS 'Identificador del usuarios';
-COMMENT ON COLUMN "sj_sis_usuario"."usu_usuario" IS 'Identificador del usuario para ingresar al sistema';
-COMMENT ON COLUMN "sj_sis_usuario"."usu_clave" IS 'Password del usuario en MD%';
-COMMENT ON COLUMN "sj_sis_usuario"."usu_estado" IS 'etsdo de activacion o desactivacion del usuario';
-COMMENT ON COLUMN "sj_sis_usuario"."per_id" IS 'identificador de la persona';
-
 CREATE TABLE "sj_sis_persona" (
 "per_id" serial NOT NULL,
 "per_nombres" varchar(100),
 "per_apellidos" varchar(100),
 "per_direccion" varchar(150),
 "per_fecnac" date,
-"per_fono" varchar(10),
+"per_fono" varchar(13),
 "per_celular" varchar(13),
 "per_email" varchar(50),
+"per_usuario" varchar(20),
 "per_estado" bool,
-"per_identificador" varchar(15),
 "tipd_id" int4,
-"foto_id" int4,
+"per_identificador" varchar(15),
 "civ_id" int4,
+"sex_id" int4,
+"gen_id" int4,
 "pol_provincia" int4,
 "pol_canton" int4,
 "pol_parroquia" int4,
-"sex_id" int4,
-"gen_id" int4,
 PRIMARY KEY ("per_id") 
 );
 
@@ -76,18 +61,19 @@ COMMENT ON COLUMN "sj_sis_persona"."per_nombres" IS 'Nombres del integrante del 
 COMMENT ON COLUMN "sj_sis_persona"."per_apellidos" IS 'Apellidos del integrante del sistema';
 COMMENT ON COLUMN "sj_sis_persona"."per_direccion" IS 'Direcciond del integrante del sistema';
 COMMENT ON COLUMN "sj_sis_persona"."per_fecnac" IS 'Fecha de nacimiento del integrante del sistema';
-COMMENT ON COLUMN "sj_sis_persona"."per_fono" IS 'Telefono de del integrante del sistema';
+COMMENT ON COLUMN "sj_sis_persona"."per_fono" IS 'Registra el telefono del usuario';
 COMMENT ON COLUMN "sj_sis_persona"."per_celular" IS 'Celular del integrante del sistema ';
+COMMENT ON COLUMN "sj_sis_persona"."per_email" IS 'Referencia al email personal';
+COMMENT ON COLUMN "sj_sis_persona"."per_usuario" IS 'usuario Institucional';
 COMMENT ON COLUMN "sj_sis_persona"."per_estado" IS 'estado activo o desactivado del integrante del sistema';
-COMMENT ON COLUMN "sj_sis_persona"."per_identificador" IS 'Numeor de cedula o passaporte del integrante del sistema';
 COMMENT ON COLUMN "sj_sis_persona"."tipd_id" IS 'Tipo de cedula o passaporte del integrante del sistema';
-COMMENT ON COLUMN "sj_sis_persona"."foto_id" IS 'fotos del del integrante del sistema';
+COMMENT ON COLUMN "sj_sis_persona"."per_identificador" IS 'Numeor de cedula o passaporte del integrante del sistema';
 COMMENT ON COLUMN "sj_sis_persona"."civ_id" IS 'Estado civil del integrante del sistema';
+COMMENT ON COLUMN "sj_sis_persona"."sex_id" IS 'identificador del sexo';
+COMMENT ON COLUMN "sj_sis_persona"."gen_id" IS 'identificador del genero';
 COMMENT ON COLUMN "sj_sis_persona"."pol_provincia" IS 'Provincia del integrante del sistema';
 COMMENT ON COLUMN "sj_sis_persona"."pol_canton" IS 'Canton del integrante del sistema';
 COMMENT ON COLUMN "sj_sis_persona"."pol_parroquia" IS 'Parroquia del integrante del sistema';
-COMMENT ON COLUMN "sj_sis_persona"."sex_id" IS 'identificador del sexo';
-COMMENT ON COLUMN "sj_sis_persona"."gen_id" IS 'identificador del genero';
 
 CREATE TABLE "sj_sis_rol" (
 "rol_id" serial NOT NULL,
@@ -106,7 +92,7 @@ CREATE TABLE "sj_sis_rol_men_usu_cen" (
 "rmuc_determinado" int,
 "rol_id" int4,
 "men_id" int4,
-"usu_id" int4,
+"per_id" int4,
 "cent_id" int4,
 PRIMARY KEY ("rmuc_id") 
 );
@@ -116,7 +102,7 @@ COMMENT ON COLUMN "sj_sis_rol_men_usu_cen"."rmuc_estado" IS 'estado del rmuc';
 COMMENT ON COLUMN "sj_sis_rol_men_usu_cen"."rmuc_determinado" IS 'determinado del del rmuc';
 COMMENT ON COLUMN "sj_sis_rol_men_usu_cen"."rol_id" IS 'rol del del rmuc';
 COMMENT ON COLUMN "sj_sis_rol_men_usu_cen"."men_id" IS 'menu del rmuc';
-COMMENT ON COLUMN "sj_sis_rol_men_usu_cen"."usu_id" IS 'usuario del rmuc';
+COMMENT ON COLUMN "sj_sis_rol_men_usu_cen"."per_id" IS 'identificador del usaurio';
 COMMENT ON COLUMN "sj_sis_rol_men_usu_cen"."cent_id" IS 'centro del del rmuc';
 
 CREATE TABLE "sj_sis_menu" (
@@ -134,7 +120,7 @@ COMMENT ON COLUMN "sj_sis_menu"."men_padre" IS 'padre del menu';
 
 CREATE TABLE "sj_sis_civil" (
 "civ_id" serial NOT NULL,
-"civ_nombre" varchar(10),
+"civ_nombre" varchar(20),
 PRIMARY KEY ("civ_id") 
 );
 
@@ -226,10 +212,8 @@ COMMENT ON COLUMN "sj_sis_genero"."gen_id" IS 'identificador del genero';
 COMMENT ON COLUMN "sj_sis_genero"."gen_nombre" IS 'nombre del genero';
 
 
-ALTER TABLE "sj_sis_usuario" ADD CONSTRAINT "fk_sj_sis_usuario_sj_sis_usuario_1" FOREIGN KEY ("per_id") REFERENCES "sj_sis_persona" ("per_id");
 ALTER TABLE "sj_sis_rol_men_usu_cen" ADD CONSTRAINT "fk_sj_sis_rol_men_usu_cen_sj_sis_rol_men_usu_cen_1" FOREIGN KEY ("men_id") REFERENCES "sj_sis_menu" ("men_id");
 ALTER TABLE "sj_sis_centro" ADD CONSTRAINT "fk_sj_sis_centro_sj_sis_centro_2" FOREIGN KEY ("tipc_id") REFERENCES "sj_sis_tip_cent" ("tipc_id");
-ALTER TABLE "sj_sis_rol_men_usu_cen" ADD CONSTRAINT "fk_sj_sis_rol_men_usu_cen_sj_sis_rol_men_usu_cen_3" FOREIGN KEY ("usu_id") REFERENCES "sj_sis_usuario" ("usu_id");
 ALTER TABLE "sj_sis_rol_men_usu_cen" ADD CONSTRAINT "fk_sj_sis_rol_men_usu_cen_sj_sis_rol_men_usu_cen_2" FOREIGN KEY ("rol_id") REFERENCES "sj_sis_rol" ("rol_id");
 ALTER TABLE "sj_sis_persona" ADD CONSTRAINT "fk_sj_sis_persona_sj_sis_persona_1" FOREIGN KEY ("civ_id") REFERENCES "sj_sis_civil" ("civ_id");
 ALTER TABLE "sj_sis_foto" ADD CONSTRAINT "fk_sj_sis_foto_sj_sis_foto_1" FOREIGN KEY ("per_id") REFERENCES "sj_sis_persona" ("per_id");
@@ -240,4 +224,5 @@ ALTER TABLE "sj_sis_centro" ADD CONSTRAINT "fk_sj_sis_centro_sj_sis_centro_5" FO
 ALTER TABLE "sj_sis_centro" ADD CONSTRAINT "fk_sj_sis_centro_sj_sis_centro_4" FOREIGN KEY ("pol_caton") REFERENCES "sj_sis_div_politica" ("pol_id");
 ALTER TABLE "sj_sis_centro" ADD CONSTRAINT "fk_sj_sis_centro_sj_sis_centro_3" FOREIGN KEY ("pol_provincia") REFERENCES "sj_sis_div_politica" ("pol_id");
 ALTER TABLE "sj_sis_persona" ADD CONSTRAINT "fk_sj_sis_persona_sj_sis_persona_4" FOREIGN KEY ("gen_id") REFERENCES "sj_sis_genero" ("gen_id");
+ALTER TABLE "sj_sis_rol_men_usu_cen" ADD CONSTRAINT "fk_sj_sis_rol_men_usu_cen_sj_sis_rol_men_usu_cen_3" FOREIGN KEY ("per_id") REFERENCES "sj_sis_persona" ("per_id");
 

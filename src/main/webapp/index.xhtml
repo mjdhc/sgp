@@ -4,7 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Ingreso de sistema</title>
     </h:head>
     <h:body>
         <h:form>
@@ -14,8 +14,7 @@
                 <p:outputLabel for="txtUsuario" value="Usuario"/>
                 <p:inputText id="txtUsuario" required="true" value="#{indexController.personas.perUsuario}"/>
                 
-                <p:outputLabel for="txtClave" value="Contraseña"/>
-                <p:inputText id="txtClave" required="true"/>
+             
                 
                 <h:column/>
                 <p:commandButton icon="ui-icon-key" value="Ingresar" actionListener="#{indexController.ingresarSistema}"/>   

@@ -41,6 +41,7 @@ public class indexController implements Serializable {
 
    
     public String IngresarSistema(){
+        
         System.err.println("Ingreso al metodo solicitado");
         return "/protegido/principal";
     }
