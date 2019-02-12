@@ -61,6 +61,7 @@ public class indexController implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aviso", "El Usuario y Contraseña no Corresponden"));
         }
         return redireccion;
+        
     }
 
 }
