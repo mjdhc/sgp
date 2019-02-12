@@ -1784,11 +1784,3 @@ INSERT INTO "public"."sj_sis_civil" ("civ_id", "civ_nombre") VALUES ('3', 'DIVOR
 INSERT INTO "public"."sj_sis_civil" ("civ_id", "civ_nombre") VALUES ('4', 'VIUDO');
 INSERT INTO "public"."sj_sis_civil" ("civ_id", "civ_nombre") VALUES ('5', 'UNION LIBR');
 
-
-
-
-strstsdtzdtst
-
-
-
-
