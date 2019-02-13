@@ -32,4 +32,5 @@ public interface SjSisPersonaFacadeLocal {
     
     SjSisPersona IniciasSesion(SjSisPersona per);
     
+    SjSisPersona IniciasDatos(String nick, String clave);
 }
