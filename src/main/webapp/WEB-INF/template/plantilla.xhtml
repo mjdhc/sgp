@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -20,7 +21,17 @@
 
 
         <div id="top" class="top">
-            <ui:insert name="top">Top</ui:insert>
+            <ui:insert name="top">
+                <h:form>
+                    <p:menubar>
+                        <p:menuitem value="opcion1"/>
+                        <p:menuitem value="opcion2"/>
+                        <p:menuitem value="opcion3"/>
+                        <p:menuitem value="opcion4"/>                        
+                    </p:menubar>
+                        
+                </h:form>
+            </ui:insert>
         </div>
         <div>
             <div id="left">
