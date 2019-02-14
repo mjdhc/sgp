@@ -71,12 +71,6 @@ public class indexController implements Serializable {
             per = personaEJB.IniciasDatos(nick,clave);
             varGlobales.setIdUsuario(per.getPerId());
             varGlobales.setUsuario(per.getPerUsuario());
-            
-System.out.println("id:"+varGlobales.getIdUsuario());
-//System.out.println("usuario:"+varG.getUsuario());
-//System.out.println("id:"+per.getPerId());
-//System.out.println("usuario:"+per.getPerUsuario());
-
             if (per != null) 
             {   FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", varGlobales);
                 redireccion = "/protegido/principal?faces-redirect=true";
@@ -90,7 +84,6 @@ System.out.println("id:"+varGlobales.getIdUsuario());
             e.printStackTrace();
         }
         return redireccion;
-        
     }
     
 	public String getNick() {
