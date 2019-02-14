@@ -101,5 +101,6 @@ public class indexController implements Serializable {
 	public void setClave(String clave) {
 		this.clave = clave;
 	}    
+        /*listo ok*/
 
 }
